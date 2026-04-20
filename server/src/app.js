@@ -6,11 +6,11 @@ const authRoutes = require("./modules/auth/routes/auth.routes");
 
 const app = express();
 
-app.use("/api/auth", authRoutes);
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
 app.use(morgan("dev"));
+app.use("/api/auth", authRoutes);
 
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok" });
