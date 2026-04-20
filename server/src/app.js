@@ -2,9 +2,11 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
+const authRoutes = require("./modules/auth/routes/auth.routes");
 
 const app = express();
 
+app.use("/api/auth", authRoutes);
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
