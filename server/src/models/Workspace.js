@@ -2,10 +2,15 @@ const mongoose = require("mongoose");
 
 const workspaceSchema = new mongoose.Schema(
   {
-    name: String,
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     ownerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
     members: [
       {
@@ -16,6 +21,7 @@ const workspaceSchema = new mongoose.Schema(
         role: {
           type: String,
           enum: ["owner", "member"],
+          default: "member",
         },
       },
     ],

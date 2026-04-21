@@ -14,6 +14,7 @@ exports.createProject = async (req, res) => {
     const project = await projectService.createProject({
       name,
       workspaceId,
+      userId: req.user.id,
     });
 
     res.status(201).json(project);
