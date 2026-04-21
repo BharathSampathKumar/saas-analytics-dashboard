@@ -3,19 +3,28 @@ name: CI Pipeline
 on:
   pull_request:
     branches: [develop, main]
+  push:
+    branches: [develop, main]  # optional but recommended
 
 jobs:
-  build:
+  backend:
+    name: Lint, Test & Security
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./server
+
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v3
 
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: "npm"
+          cache-dependency-path: server/package-lock.json
 
       - name: Install deps
         run: npm install
@@ -23,8 +32,11 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Prettier check
+        run: npx prettier --check .
+
       - name: Run tests
         run: npm test
-      
-      - name: Run npm audit
+
+      - name: Security audit
         run: npm audit --audit-level=high
