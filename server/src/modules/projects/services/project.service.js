@@ -1,3 +1,5 @@
+const generateApiKey = require("../../../utils/generateApiKey");
+const Project = require("../../../models/Project");
 const Workspace = require("../../../models/Workspace");
 
 exports.createProject = async ({ name, workspaceId, userId }) => {
@@ -17,4 +19,8 @@ exports.createProject = async ({ name, workspaceId, userId }) => {
     workspaceId,
     apiKey,
   });
+};
+
+exports.getProjectsByWorkspace = async (workspaceId) => {
+  return Project.find({ workspaceId }).sort({ createdAt: -1 });
 };

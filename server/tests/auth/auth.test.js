@@ -11,7 +11,6 @@ describe("Auth API", () => {
           email: "test@example.com",
           password: "123456",
         });
-      console.log(res.body);
       expect(res.statusCode).toBe(201);
       expect(res.body.token).toBeDefined();
       expect(res.body.user.email).toBe("test@example.com");

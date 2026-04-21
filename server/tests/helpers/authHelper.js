@@ -2,8 +2,10 @@ const request = require("supertest");
 const app = require("../../src/app");
 
 exports.registerAndLogin = async () => {
+  const uniqueEmail = `test_${Date.now()}@example.com`;
+
   const user = {
-    email: "test@example.com",
+    email: uniqueEmail,
     password: "password123",
     name: "Test User",
   };

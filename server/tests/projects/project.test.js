@@ -39,7 +39,6 @@ describe("Project API", () => {
         name: "Project 1",
         workspaceId,
       });
-
     const res = await request(app)
       .get(`/api/projects?workspaceId=${workspaceId}`)
       .set("Authorization", `Bearer ${token}`);
