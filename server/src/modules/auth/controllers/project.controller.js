@@ -19,6 +19,10 @@ exports.getProjects = async (req, res) => {
   try {
     const { workspaceId } = req.query;
 
+    if (!workspaceId) {
+      return res.status(400).json({ message: "workspaceId required" });
+    }
+
     const projects = await projectService.getProjectsByWorkspace(
       workspaceId
     );
