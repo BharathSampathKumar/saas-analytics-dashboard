@@ -1,8 +1,13 @@
 const mongoose = require("mongoose");
-require("dotenv").config({ path: ".env" });
+const { MongoMemoryServer } = require("mongodb-memory-server");
+
+let mongoServer;
 
 const connectDB = async () => {
-  await mongoose.connect(process.env.MONGO_URI_TEST);
+  mongoServer = await MongoMemoryServer.create();
+  const uri = mongoServer.getUri();
+
+  await mongoose.connect(uri);
 };
 
 const clearDB = async () => {
@@ -14,7 +19,13 @@ const clearDB = async () => {
 };
 
 const closeDB = async () => {
+  await mongoose.connection.dropDatabase();
   await mongoose.connection.close();
+  await mongoServer.stop();
 };
 
-module.exports = { connectDB, clearDB, closeDB };
+module.exports = {
+  connectDB,
+  clearDB,
+  closeDB,
+};
