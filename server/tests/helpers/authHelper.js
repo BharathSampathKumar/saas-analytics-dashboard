@@ -18,6 +18,6 @@ exports.registerAndLogin = async () => {
       email: user.email,
       password: user.password,
     });
-
+  
   return res.body.token;
 };
