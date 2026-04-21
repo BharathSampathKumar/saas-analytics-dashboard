@@ -19,7 +19,6 @@ exports.createProject = async (req, res) => {
 
     res.status(201).json(project);
   } catch (err) {
-    console.error("Project error:", err.message);
     res.status(400).json({ message: err.message });
   }
 };
@@ -34,7 +33,6 @@ exports.getProjects = async (req, res) => {
 
     res.status(200).json(projects);
   } catch (err) {
-    console.error("Project error:", err.message);
     res.status(400).json({ message: err.message });
   }
 };

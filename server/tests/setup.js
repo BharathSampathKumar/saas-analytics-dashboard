@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const mongoose = require("mongoose");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 
@@ -12,15 +10,15 @@ beforeAll(async () => {
   await mongoose.connect(uri);
 });
 
+afterEach(async () => {
+  const collections = await mongoose.connection.db.collections();
+
+  for (let collection of collections) {
+    await collection.deleteMany({});
+  }
+});
+
 afterAll(async () => {
   await mongoose.connection.close();
   await mongo.stop();
-});
-
-afterEach(async () => {
-  const collections = mongoose.connection.collections;
-
-  for (const key in collections) {
-    await collections[key].deleteMany();
-  }
 });
