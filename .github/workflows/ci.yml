@@ -2,29 +2,68 @@ name: CI Pipeline
 
 on:
   pull_request:
-    branches: [develop, main]
+    branches: [dev, main]
+  push:
+    branches: [dev, main]
 
 jobs:
-  build:
+  lint:
+    name: Lint Check
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    defaults:
+      run:
+        working-directory: ./server
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: "npm"
+          cache-dependency-path: server/package-lock.json
 
-      - name: Install deps
-        run: npm install
+      - run: npm install
+      - run: npm run lint
+      - run: npx prettier --check .
 
-      - name: Lint
-        run: npm run lint
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
 
-      - name: Run tests
-        run: npm test
-      
-      - name: Run npm audit
-        run: npm audit --audit-level=high
+    defaults:
+      run:
+        working-directory: ./server
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: server/package-lock.json
+
+      - run: npm install
+      - run: npm test
+
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./server
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: server/package-lock.json
+
+      - run: npm install
+      - run: npm audit --audit-level=high
