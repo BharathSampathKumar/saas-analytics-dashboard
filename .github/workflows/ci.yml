@@ -4,39 +4,54 @@ on:
   pull_request:
     branches: [dev, main]
   push:
-    branches: [dev, main]  # optional but recommended
+    branches: [dev, main]
 
 jobs:
-  backend:
-    name: Lint, Test & Security
+  lint:
+    name: Lint Check
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ./server
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: "npm"
-          cache-dependency-path: ./server/package-lock.json
+          cache-dependency-path: package-lock.json
 
-      - name: Install deps
-        run: npm install
+      - run: npm install
+      - run: npm run lint
+      - run: npx prettier --check .
 
-      - name: Lint
-        run: npm run lint
+  test:
+    name: Test Suite
+    runs-on: ubuntu-latest
 
-      - name: Prettier check
-        run: npx prettier --check .
+    steps:
+      - uses: actions/checkout@v3
 
-      - name: Run tests
-        run: npm test
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: package-lock.json
 
-      - name: Security audit
-        run: npm audit --audit-level=high
+      - run: npm install
+      - run: npm test
+
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+
+      - run: npm install
+      - run: npm audit --audit-level=high
