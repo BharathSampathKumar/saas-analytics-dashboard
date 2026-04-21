@@ -2,9 +2,9 @@ name: CI Pipeline
 
 on:
   pull_request:
-    branches: [develop, main]
+    branches: [dev, main]
   push:
-    branches: [develop, main]  # optional but recommended
+    branches: [dev, main]  # optional but recommended
 
 jobs:
   backend:
