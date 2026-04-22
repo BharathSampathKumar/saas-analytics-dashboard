@@ -1,4 +1,4 @@
-const Workspace = require("../../../models/Workspace");
+const Workspace = require('../../../models/Workspace');
 
 exports.createWorkspace = async ({ name, userId }) => {
   const workspace = await Workspace.create({
@@ -7,7 +7,7 @@ exports.createWorkspace = async ({ name, userId }) => {
     members: [
       {
         userId,
-        role: "owner",
+        role: 'owner',
       },
     ],
   });
@@ -17,7 +17,7 @@ exports.createWorkspace = async ({ name, userId }) => {
 
 exports.getUserWorkspaces = async (userId) => {
   return Workspace.find({
-    "members.userId": userId,
+    'members.userId': userId,
   }).sort({ createdAt: -1 });
 };
 

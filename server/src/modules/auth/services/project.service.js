@@ -1,5 +1,5 @@
-const Project = require("../../../models/Project");
-const generateApiKey = require("../../../utils/generateApiKey");
+const Project = require('../../../models/Project');
+const generateApiKey = require('../../../utils/generateApiKey');
 
 exports.createProject = async ({ name, workspaceId }) => {
   const apiKey = generateApiKey();

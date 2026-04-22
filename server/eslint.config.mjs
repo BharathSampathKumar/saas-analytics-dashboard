@@ -1,8 +1,8 @@
-import js from "@eslint/js";
-import globals from "globals";
-import { defineConfig } from "eslint/config";
+import js from '@eslint/js';
+import globals from 'globals';
+import { defineConfig } from 'eslint/config';
 
-const isProd = process.env.NODE_ENV === "production";
+const isProd = process.env.NODE_ENV === 'production';
 
 export default defineConfig([
   {
@@ -17,23 +17,23 @@ export default defineConfig([
 
   // App code
   {
-    files: ["**/*.js"],
+    files: ['**/*.js'],
     languageOptions: {
-      sourceType: "commonjs",
+      sourceType: 'commonjs',
       globals: {
         ...globals.node,
         ...globals.browser,
       },
     },
     rules: {
-      "no-unused-vars": "warn",
-      "no-console": isProd ? "warn" : "off",
+      'no-unused-vars': 'warn',
+      'no-console': isProd ? 'warn' : 'off',
     },
   },
 
   // Test files
   {
-    files: ["tests/**/*.js"],
+    files: ['tests/**/*.js'],
     languageOptions: {
       globals: {
         ...globals.jest,

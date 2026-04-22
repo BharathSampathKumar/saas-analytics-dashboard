@@ -1,4 +1,4 @@
-const eventService = require("../services/event.service");
+const eventService = require('../services/event.service');
 
 exports.ingest = async (req, res) => {
   try {

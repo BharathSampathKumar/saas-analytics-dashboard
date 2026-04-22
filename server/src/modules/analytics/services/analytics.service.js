@@ -1,8 +1,8 @@
-const Event = require("../../../models/Event");
+const Event = require('../../../models/Event');
 
 const getDateRange = (range) => {
   const now = new Date();
-  const days = parseInt(range.replace("d", ""), 10);
+  const days = parseInt(range.replace('d', ''), 10);
 
   const start = new Date();
   start.setDate(now.getDate() - days);
@@ -10,7 +10,7 @@ const getDateRange = (range) => {
   return { start, end: now };
 };
 
-exports.getEventsOverTime = async ({ projectId, range = "7d" }) => {
+exports.getEventsOverTime = async ({ projectId, range = '7d' }) => {
   const { start, end } = getDateRange(range);
 
   return Event.aggregate([
@@ -23,7 +23,7 @@ exports.getEventsOverTime = async ({ projectId, range = "7d" }) => {
     {
       $group: {
         _id: {
-          $dateToString: { format: "%Y-%m-%d", date: "$timestamp" },
+          $dateToString: { format: '%Y-%m-%d', date: '$timestamp' },
         },
         count: { $sum: 1 },
       },
@@ -32,7 +32,7 @@ exports.getEventsOverTime = async ({ projectId, range = "7d" }) => {
   ]);
 };
 
-exports.getTopEvents = async ({ projectId, range = "7d" }) => {
+exports.getTopEvents = async ({ projectId, range = '7d' }) => {
   const { start, end } = getDateRange(range);
 
   return Event.aggregate([
@@ -44,7 +44,7 @@ exports.getTopEvents = async ({ projectId, range = "7d" }) => {
     },
     {
       $group: {
-        _id: "$event",
+        _id: '$event',
         count: { $sum: 1 },
       },
     },
@@ -53,20 +53,20 @@ exports.getTopEvents = async ({ projectId, range = "7d" }) => {
   ]);
 };
 
-exports.getTopPages = async ({ projectId, range = "7d" }) => {
+exports.getTopPages = async ({ projectId, range = '7d' }) => {
   const { start, end } = getDateRange(range);
 
   return Event.aggregate([
     {
       $match: {
         projectId,
-        event: "page_view",
+        event: 'page_view',
         timestamp: { $gte: start, $lte: end },
       },
     },
     {
       $group: {
-        _id: "$metadata.url",
+        _id: '$metadata.url',
         count: { $sum: 1 },
       },
     },

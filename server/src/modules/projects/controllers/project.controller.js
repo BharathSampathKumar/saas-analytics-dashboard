@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const projectService = require("../services/project.service");
+const mongoose = require('mongoose');
+const projectService = require('../services/project.service');
 
 exports.createProject = async (req, res) => {
   try {
@@ -7,7 +7,7 @@ exports.createProject = async (req, res) => {
 
     if (!mongoose.Types.ObjectId.isValid(workspaceId)) {
       return res.status(400).json({
-          message: "Invalid workspaceId format",
+        message: 'Invalid workspaceId format',
       });
     }
 
@@ -27,9 +27,7 @@ exports.getProjects = async (req, res) => {
   try {
     const { workspaceId } = req.query;
 
-    const projects = await projectService.getProjectsByWorkspace(
-      workspaceId
-    );
+    const projects = await projectService.getProjectsByWorkspace(workspaceId);
 
     res.status(200).json(projects);
   } catch (err) {
