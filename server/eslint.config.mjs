@@ -5,6 +5,14 @@ import { defineConfig } from "eslint/config";
 const isProd = process.env.NODE_ENV === "production";
 
 export default defineConfig([
+  {
+    languageOptions: {
+      globals: {
+        ...globals.node, // 👈 THIS FIXES 'process' error
+      },
+    },
+  },
+
   js.configs.recommended,
 
   // App code
