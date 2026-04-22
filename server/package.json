@@ -2,10 +2,10 @@
   "name": "saas-analytics-dashboard",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "dev": "nodemon server/src/server.js",
-    "start": "node server/src/server.js",
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
     "lint": "eslint .",
     "test": "jest --runInBand",
     "test:watch": "jest --watch"
@@ -27,6 +27,7 @@
     "tslib": "^2.8.1"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "eslint": "^10.2.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",

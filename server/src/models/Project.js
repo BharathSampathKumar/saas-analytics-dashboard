@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const projectSchema = new mongoose.Schema(
   {
@@ -10,7 +10,7 @@ const projectSchema = new mongoose.Schema(
     workspaceId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "Workspace",
+      ref: 'Workspace',
     },
     apiKey: {
       type: String,
@@ -18,7 +18,7 @@ const projectSchema = new mongoose.Schema(
       unique: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-module.exports = mongoose.model("Project", projectSchema);
+module.exports = mongoose.model('Project', projectSchema);

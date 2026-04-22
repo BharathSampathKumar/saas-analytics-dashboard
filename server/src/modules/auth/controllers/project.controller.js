@@ -1,4 +1,4 @@
-const projectService = require("../services/project.service");
+const projectService = require('../services/project.service');
 
 exports.createProject = async (req, res) => {
   try {
@@ -20,12 +20,10 @@ exports.getProjects = async (req, res) => {
     const { workspaceId } = req.query;
 
     if (!workspaceId) {
-      return res.status(400).json({ message: "workspaceId required" });
+      return res.status(400).json({ message: 'workspaceId required' });
     }
 
-    const projects = await projectService.getProjectsByWorkspace(
-      workspaceId
-    );
+    const projects = await projectService.getProjectsByWorkspace(workspaceId);
 
     res.status(200).json(projects);
   } catch (err) {

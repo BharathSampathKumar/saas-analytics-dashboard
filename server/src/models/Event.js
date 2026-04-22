@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const eventSchema = new mongoose.Schema(
   {
     projectId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Project",
+      ref: 'Project',
       required: true,
       index: true,
     },
@@ -23,10 +23,10 @@ const eventSchema = new mongoose.Schema(
       default: {},
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 // Compound index (important for analytics queries)
 eventSchema.index({ projectId: 1, timestamp: -1 });
 
-module.exports = mongoose.model("Event", eventSchema);
+module.exports = mongoose.model('Event', eventSchema);

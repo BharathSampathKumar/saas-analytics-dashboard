@@ -1,10 +1,6 @@
-process.env.JWT_SECRET = "testsecret";
+process.env.JWT_SECRET = 'testsecret';
 
-const {
-  connectDB,
-  clearDB,
-  closeDB,
-} = require("./testSetup");
+const { connectDB, clearDB, closeDB } = require('./testSetup');
 
 beforeAll(async () => {
   await connectDB();

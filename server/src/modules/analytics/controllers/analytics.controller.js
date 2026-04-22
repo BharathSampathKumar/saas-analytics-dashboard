@@ -1,4 +1,4 @@
-const analyticsService = require("../services/analytics.service");
+const analyticsService = require('../services/analytics.service');
 
 exports.eventsOverTime = async (req, res) => {
   try {

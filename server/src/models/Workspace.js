@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const workspaceSchema = new mongoose.Schema(
   {
@@ -9,24 +9,24 @@ const workspaceSchema = new mongoose.Schema(
     },
     ownerId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
     members: [
       {
         userId: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "User",
+          ref: 'User',
         },
         role: {
           type: String,
-          enum: ["owner", "member"],
-          default: "member",
+          enum: ['owner', 'member'],
+          default: 'member',
         },
       },
     ],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-module.exports = mongoose.model("Workspace", workspaceSchema);
+module.exports = mongoose.model('Workspace', workspaceSchema);
