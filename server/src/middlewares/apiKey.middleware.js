@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
 
     req.project = project;
     next();
-  } catch (err) {
+  } catch {
     res.status(500).json({ message: "API key validation failed" });
   }
 };
